@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>إلى مهدي ❤️</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: Arial;
+    background: linear-gradient(to right, #ff6a88, #ff99ac);
+    color: white;
+    overflow-x: hidden;
+}
+.container {
+    padding: 40px 20px;
+}
+input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+}
+button {
+    background: white;
+    color: #ff4b6e;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#mainContent {
+    display: none;
+}
+#hiddenMessage {
+    display: none;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>ادخل تاريخ بدايتنا (YYYY-MM-DD) ❤️</h2>
+<input type="text" id="password" placeholder="مثال: 2024-08-13">
+<br>
+<button onclick="checkPassword()">دخول</button>
+
+<div id="mainContent">
+    <h1>إلى مهدي 🤍</h1>
+    <p>
+        سنة ونص سوا… وكل يوم أحبك أكثر من اليوم اللي قبله 💕  
+        وجودك بحياتي نعمة ما أبدلها بأي شي.
+    </p>
+
+    <h3 id="counter"></h3>
+
+    <button onclick="showLove()">اضغط هنا يا مهدي ❤️</button>
+
+    <div id="hiddenMessage">
+        أحبك قد عدد نبضات قلبي…  
+        وأتمنى كل أيامنا تبقى سعادة ودفا 🤍  
+        عيد حب سعيد يا أجمل صدفة بحياتي.
+    </div>
+
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+</div>
+
+<script>
+const startDate = new Date("2024-08-13"); // غيري التاريخ هنا
+
+function checkPassword() {
+    const input = document.getElementById("password").value;
+    if (input === "2024-08-13") {
+        document.getElementById("mainContent").style.display = "block";
+    } else {
+        alert("غلط يا مهدي 😌 جرب مرة ثانية");
+    }
+}
+
+function showLove() {
+    document.getElementById("hiddenMessage").style.display = "block";
+}
+
+function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("counter").innerText =
+        "صارلنا سوا " + days + " يوم حب 🤍";
+}
+updateCounter();
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
