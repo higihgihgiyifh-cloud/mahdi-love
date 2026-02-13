@@ -2,125 +2,117 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>إلى مهدي ❤️</title>
+<title>مهدي ❤️</title>
+
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-family: Arial;
-    background: linear-gradient(to right, #ff6a88, #ff99ac);
-    color: white;
-    overflow-x: hidden;
+body{
+  margin:0;
+  font-family: Arial;
+  text-align:center;
+  background: linear-gradient(135deg,#ff758c,#ff7eb3);
+  color:white;
+  overflow:hidden;
 }
-.container {
-    padding: 40px 20px;
+
+.container{
+  margin-top:120px;
 }
-input {
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    text-align: center;
+
+input{
+  padding:10px;
+  border-radius:20px;
+  border:none;
+  text-align:center;
 }
-button {
-    background: white;
-    color: #ff4b6e;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    border-radius: 25px;
-    cursor: pointer;
-    margin-top: 10px;
+
+button{
+  padding:10px 20px;
+  border-radius:20px;
+  border:none;
+  background:white;
+  color:#ff4f81;
+  cursor:pointer;
+  margin-top:10px;
 }
-#mainContent {
-    display: none;
+
+.hidden{
+  display:none;
 }
-#hiddenMessage {
-    display: none;
-    margin-top: 20px;
-    font-size: 20px;
+
+.bigLetters{
+  font-size:80px;
+  margin-top:30px;
+  animation:pulse 1.5s infinite;
 }
-.heart {
-    position: fixed;
-    top: -10px;
-    font-size: 20px;
-    animation: fall linear infinite;
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
 }
-@keyframes fall {
-    to {
-        transform: translateY(100vh);
-    }
+
+.firework{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+  from{opacity:1; transform:scale(1);}
+  to{opacity:0; transform:scale(4);}
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
-
-<h2>ادخل تاريخ بدايتنا (YYYY-MM-DD) ❤️</h2>
-<input type="text" id="password" placeholder="مثال: 2024-08-13">
-<br>
-<button onclick="checkPassword()">دخول</button>
-
-<div id="mainContent">
-    <h1>إلى مهدي 🤍</h1>
-    <p>
-        سنة ونص سوا… وكل يوم أحبك أكثر من اليوم اللي قبله 💕  
-        وجودك بحياتي نعمة ما أبدلها بأي شي.
-    </p>
-
-    <h3 id="counter"></h3>
-
-    <button onclick="showLove()">اضغط هنا يا مهدي ❤️</button>
-
-    <div id="hiddenMessage">
-        أحبك قد عدد نبضات قلبي…  
-        وأتمنى كل أيامنا تبقى سعادة ودفا 🤍  
-        عيد حب سعيد يا أجمل صدفة بحياتي.
-    </div>
-
-    <audio autoplay loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+  <h2>شنو أكثر شي أحبه وأفرح بي 😉؟</h2>
+  <input type="text" id="answer" placeholder="اكتب الجواب هنا">
+  <br>
+  <button onclick="checkAnswer()">دخول</button>
 </div>
 
+<div id="lovePage" class="hidden">
+  <h1>مفاجأة يا مهدي 💖</h1>
+
+  <div class="bigLetters">
+    M ❤️ N
+  </div>
+
+  <p style="margin-top:20px;">
+    أحبك قد عدد نجوم السماء ✨  
+    وأتمنى نظل سوا للأبد 💕
+  </p>
 </div>
 
 <script>
-const startDate = new Date("2024-08-13"); // غيري التاريخ هنا
+function checkAnswer(){
+  var answer=document.getElementById("answer").value.trim();
+  if(answer==="عيرة"){
+    document.querySelector(".container").style.display="none";
+    document.getElementById("lovePage").classList.remove("hidden");
+    startFireworks();
+  }else{
+    alert("غلط يا مهدي 😌 جرب مرة ثانية");
+  }
+}
 
-function checkPassword() {
-    const input = document.getElementById("password").value;
-    if (input === "2024-08-13") {
-        document.getElementById("mainContent").style.display = "block";
-    } else {
-        alert("غلط يا مهدي 😌 جرب مرة ثانية");
+function startFireworks(){
+  setInterval(function(){
+    for(let i=0;i<20;i++){
+      var fw=document.createElement("div");
+      fw.className="firework";
+      fw.style.background="hsl("+Math.random()*360+",100%,50%)";
+      fw.style.left=Math.random()*100+"vw";
+      fw.style.top=Math.random()*100+"vh";
+      document.body.appendChild(fw);
+      setTimeout(()=>fw.remove(),1000);
     }
+  },1500);
 }
-
-function showLove() {
-    document.getElementById("hiddenMessage").style.display = "block";
-}
-
-function updateCounter() {
-    const now = new Date();
-    const diff = now - startDate;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    document.getElementById("counter").innerText =
-        "صارلنا سوا " + days + " يوم حب 🤍";
-}
-updateCounter();
-
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-}
-setInterval(createHeart, 300);
 </script>
 
 </body>
